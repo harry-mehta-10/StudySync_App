@@ -1,0 +1,191 @@
+<Window x:Class="StudySync.Views.TaskEditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudySync.Views"
+        xmlns:vm="clr-namespace:StudySync.ViewModels"
+        mc:Ignorable="d"
+        Title="Edit Task" 
+        Height="450" 
+        Width="500"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Title -->
+        <TextBlock 
+            Grid.Row="0" 
+            Grid.Column="0" 
+            Text="Title:" 
+            VerticalAlignment="Center"
+            Margin="0,0,10,15"/>
+
+        <TextBox 
+            Grid.Row="0" 
+            Grid.Column="1" 
+            Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"
+            Margin="0,0,0,15"/>
+
+        <!-- Description -->
+        <TextBlock 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            Text="Description:" 
+            VerticalAlignment="Top"
+            Margin="0,0,10,15"/>
+
+        <TextBox 
+            Grid.Row="1" 
+            Grid.Column="1" 
+            Text="{Binding Description}"
+            TextWrapping="Wrap"
+            AcceptsReturn="True"
+            Height="60"
+            VerticalScrollBarVisibility="Auto"
+            Margin="0,0,0,15"/>
+
+        <!-- Due Date -->
+        <TextBlock 
+            Grid.Row="2" 
+            Grid.Column="0" 
+            Text="Due Date:" 
+            VerticalAlignment="Center"
+            Margin="0,0,10,15"/>
+
+        <DatePicker 
+            Grid.Row="2" 
+            Grid.Column="1" 
+            SelectedDate="{Binding DueDate}"
+            Margin="0,0,0,15"/>
+
+        <!-- Subject -->
+        <TextBlock 
+            Grid.Row="3" 
+            Grid.Column="0" 
+            Text="Subject:" 
+            VerticalAlignment="Center"
+            Margin="0,0,10,15"/>
+
+        <ComboBox 
+            Grid.Row="3" 
+            Grid.Column="1" 
+            ItemsSource="{Binding AvailableSubjects}"
+            SelectedValue="{Binding Subject}"
+            IsEditable="True"
+            Margin="0,0,0,15"/>
+
+        <!-- Priority -->
+        <TextBlock 
+            Grid.Row="4" 
+            Grid.Column="0" 
+            Text="Priority:" 
+            VerticalAlignment="Center"
+            Margin="0,0,10,15"/>
+
+        <ComboBox 
+            Grid.Row="4" 
+            Grid.Column="1" 
+            ItemsSource="{Binding AvailablePriorities}"
+            SelectedValue="{Binding TaskPriority}"
+            Margin="0,0,0,15"/>
+
+        <!-- Estimated Time -->
+        <TextBlock 
+            Grid.Row="5" 
+            Grid.Column="0" 
+            Text="Estimated Time:" 
+            VerticalAlignment="Center"
+            Margin="0,0,10,15"/>
+
+        <Grid 
+            Grid.Row="5" 
+            Grid.Column="1"
+            Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox 
+                Grid.Column="0"
+                Text="{Binding EstimatedHours}"
+                Width="50"/>
+
+            <TextBlock 
+                Grid.Column="1"
+                Text=" hours "
+                VerticalAlignment="Center"
+                Margin="5,0"/>
+
+            <TextBox 
+                Grid.Column="2"
+                Text="{Binding EstimatedMinutes}"
+                Width="50"/>
+
+            <TextBlock 
+                Grid.Column="3"
+                Text=" minutes"
+                VerticalAlignment="Center"
+                Margin="5,0"/>
+        </Grid>
+
+        <!-- Completed Status -->
+        <TextBlock 
+            Grid.Row="6" 
+            Grid.Column="0" 
+            Text="Status:" 
+            VerticalAlignment="Center"
+            Margin="0,0,10,15"/>
+
+        <CheckBox 
+            Grid.Row="6" 
+            Grid.Column="1" 
+            Content="Completed"
+            IsChecked="{Binding IsCompleted}"
+            VerticalAlignment="Center"
+            Margin="0,0,0,15"/>
+
+        <!-- Buttons -->
+        <StackPanel 
+            Grid.Row="8" 
+            Grid.Column="0" 
+            Grid.ColumnSpan="2"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right">
+
+            <Button 
+                Content="Cancel"
+                Command="{Binding CancelCommand}"
+                Click="Cancel_Click"
+                Style="{StaticResource SecondaryButtonStyle}"
+                Margin="0,0,10,0"/>
+
+            <Button 
+                Content="Save"
+                Command="{Binding SaveCommand}"
+                Click="Save_Click"
+                Style="{StaticResource PrimaryButtonStyle}"/>
+        </StackPanel>
+    </Grid>
+</Window>

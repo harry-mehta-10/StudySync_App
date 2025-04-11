@@ -1,0 +1,11 @@
+C:\Users\Harry\Desktop\PROG 2500\StudySync_App\StudySync\obj\Debug\net9.0-windows\StudySync.csproj.AssemblyReference.cache
+C:\Users\Harry\Desktop\PROG 2500\StudySync_App\StudySync\obj\Debug\net9.0-windows\Resources\CircularProgressBar.baml
+C:\Users\Harry\Desktop\PROG 2500\StudySync_App\StudySync\obj\Debug\net9.0-windows\Resources\Styles.baml
+C:\Users\Harry\Desktop\PROG 2500\StudySync_App\StudySync\obj\Debug\net9.0-windows\MainWindow.g.cs
+C:\Users\Harry\Desktop\PROG 2500\StudySync_App\StudySync\obj\Debug\net9.0-windows\Views\TaskEditDialog.g.cs
+C:\Users\Harry\Desktop\PROG 2500\StudySync_App\StudySync\obj\Debug\net9.0-windows\Views\TaskListView.g.cs
+C:\Users\Harry\Desktop\PROG 2500\StudySync_App\StudySync\obj\Debug\net9.0-windows\Views\TimerView.g.cs
+C:\Users\Harry\Desktop\PROG 2500\StudySync_App\StudySync\obj\Debug\net9.0-windows\App.g.cs
+C:\Users\Harry\Desktop\PROG 2500\StudySync_App\StudySync\obj\Debug\net9.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\Harry\Desktop\PROG 2500\StudySync_App\StudySync\obj\Debug\net9.0-windows\StudySync_MarkupCompile.cache
+C:\Users\Harry\Desktop\PROG 2500\StudySync_App\StudySync\obj\Debug\net9.0-windows\StudySync_MarkupCompile.lref

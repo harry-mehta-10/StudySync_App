@@ -1,0 +1,64 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="CircularProgressBarTemplate" TargetType="ProgressBar">
+        <Grid Background="Transparent">
+            <Ellipse x:Name="PART_Track" Fill="Transparent" Stroke="#E0E0E0" StrokeThickness="8"/>
+            <Path x:Name="PART_Indicator" Fill="Transparent" Stroke="{StaticResource PrimaryBrush}" StrokeThickness="8" 
+                  Opacity="0.8" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathGeometry.Figures>
+                            <PathFigureCollection>
+                                <PathFigure x:Name="PART_PathFigure">
+                                    <PathFigure.Segments>
+                                        <PathSegmentCollection>
+                                            <ArcSegment x:Name="PART_ArcSegment" Size="117,117" IsLargeArc="False" SweepDirection="Clockwise"/>
+                                        </PathSegmentCollection>
+                                    </PathFigure.Segments>
+                                </PathFigure>
+                            </PathFigureCollection>
+                        </PathGeometry.Figures>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <EventTrigger RoutedEvent="ProgressBar.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="PART_PathFigure" 
+                                         Storyboard.TargetProperty="StartPoint"
+                                         From="125,8" To="125,8" Duration="0:0:0.001"/>
+                        <PointAnimation Storyboard.TargetName="PART_ArcSegment" 
+                                       Storyboard.TargetProperty="Point"
+                                       From="125,8" 
+                                       To="{Binding RelativeSource={RelativeSource TemplatedParent}, 
+                                                  Path=Value, Converter={StaticResource ProgressToPointConverter}}" 
+                                       Duration="0:0:0.5">
+                            <PointAnimation.EasingFunction>
+                                <CubicEase EasingMode="EaseOut"/>
+                            </PointAnimation.EasingFunction>
+                        </PointAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="ProgressBar.ValueChanged">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <PointAnimation Storyboard.TargetName="PART_ArcSegment" 
+                                       Storyboard.TargetProperty="Point"
+                                       To="{Binding RelativeSource={RelativeSource TemplatedParent}, 
+                                                  Path=Value, Converter={StaticResource ProgressToPointConverter}}" 
+                                       Duration="0:0:0.5">
+                            <PointAnimation.EasingFunction>
+                                <CubicEase EasingMode="EaseOut"/>
+                            </PointAnimation.EasingFunction>
+                        </PointAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+</ResourceDictionary>

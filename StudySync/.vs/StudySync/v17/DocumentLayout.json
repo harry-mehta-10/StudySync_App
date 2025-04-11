@@ -1,0 +1,385 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\helpers\\converters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:helpers\\converters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\viewmodels\\tasklistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:viewmodels\\tasklistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\studysync.csproj||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:studysync.csproj||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\views\\tasklistview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:views\\tasklistview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\viewmodels\\timerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:viewmodels\\timerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\viewmodels\\taskviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:viewmodels\\taskviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\app.config||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:app.config||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\views\\statisticsview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:views\\statisticsview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\views\\timerview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:views\\timerview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\views\\taskeditdialog.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:views\\taskeditdialog.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\viewmodels\\taskeditviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:viewmodels\\taskeditviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\viewmodels\\viewmodelbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:viewmodels\\viewmodelbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\models\\statistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:models\\statistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\models\\subject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:models\\subject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|c:\\users\\harry\\desktop\\prog 2500\\studysync_app\\studysync\\models\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DFBFFE6-7FBB-4858-9441-DD4B9D9DFE70}|StudySync.csproj|solutionrelative:models\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-11T14:38:44.875Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TaskListViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\ViewModels\\TaskListViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\TaskListViewModel.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\ViewModels\\TaskListViewModel.cs",
+              "RelativeToolTip": "ViewModels\\TaskListViewModel.cs",
+              "ViewState": "AgIAAOIAAAAAAAAAAAAswP0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:46:35.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StudySync.csproj",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\StudySync.csproj",
+              "RelativeDocumentMoniker": "StudySync.csproj",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\StudySync.csproj",
+              "RelativeToolTip": "StudySync.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-11T14:53:16.172Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TaskListView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Views\\TaskListView.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\TaskListView.xaml.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Views\\TaskListView.xaml.cs",
+              "RelativeToolTip": "Views\\TaskListView.xaml.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAkwD8AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:48:45.651Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Converters.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Helpers\\Converters.cs",
+              "RelativeDocumentMoniker": "Helpers\\Converters.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Helpers\\Converters.cs",
+              "RelativeToolTip": "Helpers\\Converters.cs",
+              "ViewState": "AgIAAHkAAAAAAAAAAAAswIUAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:50:03.854Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TimerViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\ViewModels\\TimerViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\TimerViewModel.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\ViewModels\\TimerViewModel.cs",
+              "RelativeToolTip": "ViewModels\\TimerViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:46:45.551Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TaskViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\ViewModels\\TaskViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\TaskViewModel.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\ViewModels\\TaskViewModel.cs",
+              "RelativeToolTip": "ViewModels\\TaskViewModel.cs",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAAAIEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:46:24.257Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AssemblyInfo.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "AssemblyInfo.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\AssemblyInfo.cs",
+              "RelativeToolTip": "AssemblyInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:52:00Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DatabaseService.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Services\\DatabaseService.cs",
+              "RelativeDocumentMoniker": "Services\\DatabaseService.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Services\\DatabaseService.cs",
+              "RelativeToolTip": "Services\\DatabaseService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:45:30.023Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\App.xaml",
+              "RelativeDocumentMoniker": "App.xaml",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\App.xaml",
+              "RelativeToolTip": "App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-11T14:47:34.21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\MainViewModel.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAIwD0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:46:15.601Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\App.config",
+              "RelativeDocumentMoniker": "App.config",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\App.config",
+              "RelativeToolTip": "App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-04-11T14:51:43.761Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "StatisticsView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Views\\StatisticsView.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\StatisticsView.xaml.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Views\\StatisticsView.xaml.cs",
+              "RelativeToolTip": "Views\\StatisticsView.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:49:53.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "TimerView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Views\\TimerView.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\TimerView.xaml.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Views\\TimerView.xaml.cs",
+              "RelativeToolTip": "Views\\TimerView.xaml.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAIwC0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:49:26.289Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "TaskEditDialog.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Views\\TaskEditDialog.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\TaskEditDialog.xaml.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Views\\TaskEditDialog.xaml.cs",
+              "RelativeToolTip": "Views\\TaskEditDialog.xaml.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAIwB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:49:09.319Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\App.xaml.cs",
+              "RelativeDocumentMoniker": "App.xaml.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\App.xaml.cs",
+              "RelativeToolTip": "App.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:47:42.963Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:38:38.724Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "TaskEditViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\ViewModels\\TaskEditViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\TaskEditViewModel.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\ViewModels\\TaskEditViewModel.cs",
+              "RelativeToolTip": "ViewModels\\TaskEditViewModel.cs",
+              "ViewState": "AgIAAIwAAAAAAAAAAAAywKYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:46:53.242Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ViewModelBase.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\ViewModels\\ViewModelBase.cs",
+              "RelativeDocumentMoniker": "ViewModels\\ViewModelBase.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\ViewModels\\ViewModelBase.cs",
+              "RelativeToolTip": "ViewModels\\ViewModelBase.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAIwDsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:46:06.968Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Statistics.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Models\\Statistics.cs",
+              "RelativeDocumentMoniker": "Models\\Statistics.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Models\\Statistics.cs",
+              "RelativeToolTip": "Models\\Statistics.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAIwF0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:45:15.747Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Subject.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Models\\Subject.cs",
+              "RelativeDocumentMoniker": "Models\\Subject.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Models\\Subject.cs",
+              "RelativeToolTip": "Models\\Subject.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAswF8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:45:05.721Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Task.cs",
+              "DocumentMoniker": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Models\\Task.cs",
+              "RelativeDocumentMoniker": "Models\\Task.cs",
+              "ToolTip": "C:\\Users\\Harry\\Desktop\\PROG 2500\\StudySync_App\\StudySync\\Models\\Task.cs",
+              "RelativeToolTip": "Models\\Task.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAswG4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T14:44:58.863Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
