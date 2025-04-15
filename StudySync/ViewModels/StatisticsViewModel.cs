@@ -13,15 +13,18 @@ namespace StudySync.ViewModels
         private Statistics _statistics;
         private ObservableCollection<SubjectStatViewModel> _subjectStats;
         private ObservableCollection<DailyStatViewModel> _dailyStats;
+        private ObservableCollection<CalendarDataItem> _calendarData;
         private int _completedTasksToday;
         private int _totalTasksDueToday;
 
         public StatisticsViewModel(DatabaseService databaseService)
         {
-            _databaseService = databaseService;
+            _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService), "Database service cannot be null");
+
             _statistics = new Statistics();
             _subjectStats = new ObservableCollection<SubjectStatViewModel>();
             _dailyStats = new ObservableCollection<DailyStatViewModel>();
+            _calendarData = new ObservableCollection<CalendarDataItem>();
 
             RefreshStats();
         }
@@ -42,6 +45,12 @@ namespace StudySync.ViewModels
         {
             get { return _dailyStats; }
             set { SetProperty(ref _dailyStats, value); }
+        }
+
+        public ObservableCollection<CalendarDataItem> CalendarData
+        {
+            get { return _calendarData; }
+            set { SetProperty(ref _calendarData, value); }
         }
 
         public int CompletedTasksToday
@@ -72,17 +81,34 @@ namespace StudySync.ViewModels
 
         public void RefreshStats()
         {
-            // Get statistics from database
-            Statistics = _databaseService.GetStatistics();
+            try
+            {
+                if (_databaseService == null)
+                {
+                    System.Diagnostics.Debug.WriteLine("ERROR: DatabaseService is null in RefreshStats");
+                    return;
+                }
 
-            // Calculate today's stats
-            CalculateTodayStats();
+                // Get statistics from database
+                _statistics = _databaseService.GetStatistics();
+                OnPropertyChanged(nameof(Statistics));
 
-            // Generate subject statistics
-            GenerateSubjectStats();
+                // Update calendar data
+                UpdateCalendarData();
 
-            // Generate daily statistics
-            GenerateDailyStats();
+                // Calculate today's stats
+                CalculateTodayStats();
+
+                // Generate subject statistics
+                GenerateSubjectStats();
+
+                // Generate daily statistics
+                GenerateDailyStats();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in RefreshStats: {ex.Message}");
+            }
         }
 
         private void CalculateTodayStats()
@@ -147,6 +173,48 @@ namespace StudySync.ViewModels
 
             DailyStats = new ObservableCollection<DailyStatViewModel>(dailyStatsVms);
         }
+
+        private void UpdateCalendarData()
+        {
+            var items = new List<CalendarDataItem>();
+
+            // Default empty calendar with 30 days
+            var today = DateTime.Today;
+            for (int i = 0; i < 30; i++)
+            {
+                var date = today.AddDays(-i);
+                int count = 0;
+
+                // Try to get completion count from statistics
+                if (_statistics?.CompletionsByDate != null &&
+                    _statistics.CompletionsByDate.TryGetValue(date, out int completionCount))
+                {
+                    count = completionCount;
+                }
+
+                // Determine color based on count
+                string color = count == 0 ? "#EEEEEE" :
+                               count < 3 ? "#C8E6C9" :
+                               count < 5 ? "#81C784" :
+                               count < 8 ? "#4CAF50" : "#2E7D32";
+
+                items.Add(new CalendarDataItem
+                {
+                    Date = date,
+                    Count = count,
+                    Color = color
+                });
+            }
+
+            CalendarData = new ObservableCollection<CalendarDataItem>(items);
+        }
+    }
+
+    public class CalendarDataItem
+    {
+        public DateTime Date { get; set; }
+        public int Count { get; set; }
+        public string Color { get; set; }
     }
 
     public class SubjectStatViewModel
@@ -165,6 +233,17 @@ namespace StudySync.ViewModels
                 return (double)CompletedTasks / TotalTasks * 100;
             }
         }
+
+        public double CompletionPercent => CompletionPercentage;
+
+        public double ProgressWidth
+        {
+            get
+            {
+                // Adjust multiplier as needed for your UI
+                return CompletionPercentage * 2;
+            }
+        }
     }
 
     public class DailyStatViewModel
@@ -173,5 +252,21 @@ namespace StudySync.ViewModels
         public int CompletedTasks { get; set; }
 
         public string DateDisplay => Date.ToString("MMM d");
+
+        public double Height
+        {
+            get
+            {
+                // Adjust multiplier as needed for your UI
+                return CompletedTasks * 15;
+            }
+        }
+    }
+
+    public class CalendarItemViewModel
+    {
+        public DateTime Date { get; set; }
+        public int Count { get; set; }
+        public string Color { get; set; }
     }
 }

@@ -1,16 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net9.0-windows</TargetFramework>
 		<Nullable>disable</Nullable>
 		<UseWPF>true</UseWPF>
-		<ApplicationIcon>Resources\AppIcon.ico</ApplicationIcon>
+		<!-- 
+		<ApplicationIcon>Resources\AppIcon.ico</ApplicationIcon>-->
 		<EnableDefaultItems>true</EnableDefaultItems>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Page Remove="Resources\CircularProgressBar.xaml" />
+		<Page Remove="Resources\Styles.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="App.xaml" />
 		<Resource Include="Resources\AppIcon.ico" />
+		<Resource Include="Resources\CircularProgressBar.xaml" />
+		<Resource Include="Resources\Styles.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>

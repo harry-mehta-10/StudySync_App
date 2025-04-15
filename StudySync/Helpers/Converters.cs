@@ -51,7 +51,6 @@ namespace StudySync.Helpers
         {
             if (value is string subjectName && !string.IsNullOrWhiteSpace(subjectName))
             {
-                // Use a service to get the color for this subject
                 var databaseService = new DatabaseService();
                 var subject = databaseService.GetSubjectByName(subjectName);
 
@@ -64,8 +63,6 @@ namespace StudySync.Helpers
                     catch { }
                 }
             }
-
-            // Default color
             return new SolidColorBrush(Colors.Gray);
         }
 
@@ -87,8 +84,6 @@ namespace StudySync.Helpers
                 }
                 catch { }
             }
-
-            // Default color
             return new SolidColorBrush(Colors.Gray);
         }
 
@@ -112,7 +107,6 @@ namespace StudySync.Helpers
 
                 return new Point(x, y);
             }
-
             return new Point(125, 8);
         }
 
@@ -124,20 +118,18 @@ namespace StudySync.Helpers
 
     public class BarHeightConverter : IMultiValueConverter
     {
-        private const double MaxBarHeight = 100.0;
-
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values.Length >= 2 && values[0] is int completedTasks && values[1] is double containerHeight)
+            if (values.Length >= 3 &&
+                values[0] is int currentValue &&
+                values[1] is int maxValue &&
+                values[2] is double availableHeight)
             {
-                if (completedTasks <= 0)
-                    return 0.0;
+                if (maxValue == 0) return 0.0;
 
-                // Scale the bar height based on completed tasks (max height for 5+ tasks)
-                double percentage = Math.Min(completedTasks / 5.0, 1.0);
-                return percentage * containerHeight * 0.9; // 90% of container height max
+                double percentage = (double)currentValue / maxValue;
+                return percentage * availableHeight;
             }
-
             return 0.0;
         }
 

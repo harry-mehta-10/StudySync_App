@@ -20,7 +20,11 @@ namespace StudySync.ViewModels
 
         public TaskListViewModel(DatabaseService databaseService)
         {
+            if (databaseService == null)
+                throw new ArgumentNullException(nameof(databaseService), "Database service cannot be null");
+
             _databaseService = databaseService;
+            System.Diagnostics.Debug.WriteLine("TaskListViewModel constructor: DatabaseService initialized");
 
             Tasks = new ObservableCollection<TaskViewModel>();
             Subjects = new ObservableCollection<Subject>();
@@ -33,8 +37,16 @@ namespace StudySync.ViewModels
             DeleteTaskCommand = new RelayCommand(_ => DeleteTask(), _ => SelectedTask != null);
             CompleteTaskCommand = new RelayCommand(_ => CompleteTask(), _ => SelectedTask != null);
 
-            RefreshTasks();
-            RefreshSubjects();
+            // Load data after initialization
+            try
+            {
+                RefreshTasks();
+                RefreshSubjects();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error during TaskListViewModel initialization: {ex.Message}");
+            }
         }
 
         public ObservableCollection<TaskViewModel> Tasks
@@ -106,35 +118,70 @@ namespace StudySync.ViewModels
 
         public void RefreshTasks()
         {
-            var allTasks = _databaseService.GetAllTasks();
-            var taskViewModels = allTasks.Select(t => new TaskViewModel(t, _databaseService)).ToList();
-
-            // Store reference to currently selected task if any
-            int? selectedTaskId = SelectedTask?.Task?.Id;
-
-            Tasks.Clear();
-            foreach (var task in taskViewModels)
+            if (_databaseService == null)
             {
-                Tasks.Add(task);
+                System.Diagnostics.Debug.WriteLine("ERROR: DatabaseService is null in RefreshTasks");
+                return;
             }
 
-            // Restore selection if possible
-            if (selectedTaskId.HasValue)
+            try
             {
-                SelectedTask = Tasks.FirstOrDefault(t => t.Task.Id == selectedTaskId.Value);
-            }
+                var allTasks = _databaseService.GetAllTasks();
+                if (allTasks == null)
+                {
+                    Tasks.Clear();
+                    return;
+                }
 
-            FilterTasks();
+                var taskViewModels = allTasks.Select(t => new TaskViewModel(t, _databaseService)).ToList();
+
+                int? selectedTaskId = SelectedTask?.Task?.Id;
+
+                Tasks.Clear();
+                foreach (var task in taskViewModels)
+                {
+                    Tasks.Add(task);
+                }
+
+                if (selectedTaskId.HasValue)
+                {
+                    SelectedTask = Tasks.FirstOrDefault(t => t.Task.Id == selectedTaskId.Value);
+                }
+
+                FilterTasks();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in RefreshTasks: {ex.Message}");
+            }
         }
 
         public void RefreshSubjects()
         {
-            var allSubjects = _databaseService.GetAllSubjects();
-
-            Subjects.Clear();
-            foreach (var subject in allSubjects)
+            if (_databaseService == null)
             {
-                Subjects.Add(subject);
+                System.Diagnostics.Debug.WriteLine("ERROR: DatabaseService is null in RefreshSubjects");
+                return;
+            }
+
+            try
+            {
+                var allSubjects = _databaseService.GetAllSubjects();
+                if (allSubjects == null)
+                {
+                    System.Diagnostics.Debug.WriteLine("WARNING: GetAllSubjects returned null");
+                    return;
+                }
+
+                Subjects.Clear();
+                foreach (var subject in allSubjects)
+                {
+                    Subjects.Add(subject);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in RefreshSubjects: {ex.Message}");
             }
         }
 
@@ -142,19 +189,16 @@ namespace StudySync.ViewModels
         {
             var filteredTasks = Tasks.ToList();
 
-            // Filter by completion status
             if (!ShowCompletedTasks)
             {
                 filteredTasks = filteredTasks.Where(t => !t.Task.IsCompleted).ToList();
             }
 
-            // Filter by subject
             if (!string.IsNullOrEmpty(SelectedSubjectFilter) && SelectedSubjectFilter != "All")
             {
                 filteredTasks = filteredTasks.Where(t => t.Task.Subject == SelectedSubjectFilter).ToList();
             }
 
-            // Filter by search text
             if (!string.IsNullOrEmpty(SearchText))
             {
                 string searchLower = SearchText.ToLower();
@@ -163,7 +207,6 @@ namespace StudySync.ViewModels
                     (t.Task.Description != null && t.Task.Description.ToLower().Contains(searchLower))).ToList();
             }
 
-            // Apply ordering - show incomplete and due soon first
             filteredTasks = filteredTasks.OrderBy(t => t.Task.IsCompleted)
                                          .ThenBy(t => t.Task.DueDate)
                                          .ToList();
@@ -183,10 +226,8 @@ namespace StudySync.ViewModels
 
             int id = _databaseService.AddTask(newTask);
 
-            // Refresh the list
             RefreshTasks();
 
-            // Select the new task for editing
             var newTaskVm = Tasks.FirstOrDefault(t => t.Task.Id == id);
             if (newTaskVm != null)
             {
@@ -200,9 +241,7 @@ namespace StudySync.ViewModels
             if (SelectedTask == null)
                 return;
 
-            // Open task edit dialog
             var taskDialog = new TaskEditViewModel(SelectedTask.Task, _databaseService);
-
             bool? result = ShowTaskEditDialog(taskDialog);
 
             if (result == true)
@@ -217,7 +256,6 @@ namespace StudySync.ViewModels
             if (SelectedTask == null)
                 return;
 
-            // Confirm deletion
             bool? result = ShowConfirmDialog("Delete Task", $"Are you sure you want to delete the task '{SelectedTask.Task.Title}'?");
 
             if (result == true)
@@ -241,13 +279,11 @@ namespace StudySync.ViewModels
         // These methods would connect to UI dialogs - implemented in the View
         protected virtual bool? ShowTaskEditDialog(TaskEditViewModel viewModel)
         {
-            // This will be overridden or injected from the View
             return true;
         }
 
         protected virtual bool? ShowConfirmDialog(string title, string message)
         {
-            // This will be overridden or injected from the View
             return true;
         }
     }

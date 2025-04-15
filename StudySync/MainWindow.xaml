@@ -6,20 +6,28 @@
         xmlns:local="clr-namespace:StudySync"
         xmlns:viewModels="clr-namespace:StudySync.ViewModels"
         xmlns:views="clr-namespace:StudySync.Views"
+        xmlns:helpers="clr-namespace:StudySync.Helpers"
         mc:Ignorable="d"
         Title="StudySync" Height="600" Width="900"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewModels:TaskListViewModel}">
+        <DataTemplate x:Key="TaskListViewTemplate" DataType="{x:Type viewModels:TaskListViewModel}">
             <views:TaskListView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:TimerViewModel}">
-            <views:TimerView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:StatisticsViewModel}">
+
+        <DataTemplate x:Key="StatisticsViewTemplate" DataType="{x:Type viewModels:StatisticsViewModel}">
             <views:StatisticsView />
         </DataTemplate>
+
+        <DataTemplate x:Key="TimerViewTemplate" DataType="{x:Type viewModels:TimerViewModel}">
+            <views:TimerView />
+        </DataTemplate>
+
+        <helpers:ViewModelTemplateSelector x:Key="ViewModelTemplateSelector"
+                                          TaskListTemplate="{StaticResource TaskListViewTemplate}"
+                                          StatisticsTemplate="{StaticResource StatisticsViewTemplate}"
+                                          TimerTemplate="{StaticResource TimerViewTemplate}" />
     </Window.Resources>
 
     <Grid>
@@ -34,7 +42,6 @@
             Background="#F0F0F0" 
             BorderBrush="#E0E0E0" 
             BorderThickness="0,0,1,0">
-
             <StackPanel>
                 <TextBlock 
                     Text="StudySync" 
@@ -43,22 +50,18 @@
                     Margin="15" 
                     HorizontalAlignment="Center" 
                     Foreground="#333333"/>
-
                 <Border 
                     Height="1" 
                     Background="#E0E0E0" 
                     Margin="10,0,10,15"/>
-
                 <Button 
                     Command="{Binding NavigateToTasksCommand}" 
                     Style="{StaticResource NavButtonStyle}"
                     Content="Tasks"/>
-
                 <Button 
                     Command="{Binding NavigateToTimerCommand}" 
                     Style="{StaticResource NavButtonStyle}"
                     Content="Timer"/>
-
                 <Button 
                     Command="{Binding NavigateToStatsCommand}" 
                     Style="{StaticResource NavButtonStyle}"
@@ -70,6 +73,7 @@
         <ContentControl 
             Grid.Column="1" 
             Content="{Binding CurrentViewModel}" 
+            ContentTemplateSelector="{StaticResource ViewModelTemplateSelector}"
             Margin="10" />
     </Grid>
 </Window>

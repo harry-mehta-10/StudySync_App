@@ -7,22 +7,25 @@ namespace StudySync.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly DatabaseService _databaseService;
         private ViewModelBase _currentViewModel;
+        private readonly DatabaseService _databaseService;
 
-        public MainViewModel()
+        public MainViewModel(DatabaseService databaseService)
         {
-            _databaseService = new DatabaseService();
+            if (databaseService == null)
+                throw new ArgumentNullException(nameof(databaseService), "Database service cannot be null");
 
-            // Initialize sub view models
+            _databaseService = databaseService;
+
+            // Create view models with explicit database reference
             TaskListViewModel = new TaskListViewModel(_databaseService);
             TimerViewModel = new TimerViewModel();
             StatisticsViewModel = new StatisticsViewModel(_databaseService);
 
-            // Default view is task list
+            // Set default view
             CurrentViewModel = TaskListViewModel;
 
-            // Initialize commands
+            // Create commands
             NavigateToTasksCommand = new RelayCommand(_ => NavigateToTasks());
             NavigateToTimerCommand = new RelayCommand(_ => NavigateToTimer());
             NavigateToStatsCommand = new RelayCommand(_ => NavigateToStats());

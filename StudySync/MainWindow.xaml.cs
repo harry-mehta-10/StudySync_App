@@ -8,7 +8,6 @@ namespace StudySync
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
         }
     }
 }

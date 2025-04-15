@@ -15,16 +15,26 @@ namespace StudySync.Services
 
         public DatabaseService()
         {
-            // Create database in AppData folder
-            string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "StudySync");
+            try
+            {
+                // Create database in AppData folder
+                string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "StudySync");
 
-            if (!Directory.Exists(appDataPath))
-                Directory.CreateDirectory(appDataPath);
+                if (!Directory.Exists(appDataPath))
+                    Directory.CreateDirectory(appDataPath);
 
-            _dbPath = Path.Combine(appDataPath, "studysync.db");
-            _connectionString = $"Data Source={_dbPath};Version=3;";
+                _dbPath = Path.Combine(appDataPath, "studysync.db");
+                _connectionString = $"Data Source={_dbPath};Version=3;";
 
-            InitializeDatabase();
+                System.Diagnostics.Debug.WriteLine($"DatabaseService initialized with path: {_dbPath}");
+
+                InitializeDatabase();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"ERROR initializing DatabaseService: {ex.Message}");
+                throw new InvalidOperationException($"Failed to initialize DatabaseService: {ex.Message}", ex);
+            }
         }
 
         private void InitializeDatabase()
@@ -46,17 +56,17 @@ namespace StudySync.Services
                     using (var command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"
-                            CREATE TABLE IF NOT EXISTS Tasks (
-                                Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                Title TEXT NOT NULL,
-                                Description TEXT,
-                                DueDate TEXT NOT NULL,
-                                IsCompleted INTEGER NOT NULL,
-                                Subject TEXT,
-                                CompletedDate TEXT,
-                                EstimatedTime INTEGER,
-                                Priority INTEGER NOT NULL
-                            )";
+                    CREATE TABLE IF NOT EXISTS Tasks (
+                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        Title TEXT NOT NULL,
+                        Description TEXT,
+                        DueDate TEXT NOT NULL,
+                        IsCompleted INTEGER NOT NULL,
+                        Subject TEXT,
+                        CompletedDate TEXT,
+                        EstimatedTime INTEGER,
+                        Priority INTEGER NOT NULL
+                    )";
                         command.ExecuteNonQuery();
                     }
 
@@ -64,11 +74,11 @@ namespace StudySync.Services
                     using (var command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"
-                            CREATE TABLE IF NOT EXISTS Subjects (
-                                Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                Name TEXT NOT NULL UNIQUE,
-                                Color TEXT NOT NULL
-                            )";
+                    CREATE TABLE IF NOT EXISTS Subjects (
+                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        Name TEXT NOT NULL UNIQUE,
+                        Color TEXT NOT NULL
+                    )";
                         command.ExecuteNonQuery();
                     }
 
@@ -76,12 +86,12 @@ namespace StudySync.Services
                     using (var command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"
-                            CREATE TABLE IF NOT EXISTS Statistics (
-                                Id INTEGER PRIMARY KEY,
-                                CurrentStreak INTEGER NOT NULL,
-                                LongestStreak INTEGER NOT NULL,
-                                LastCompletionDate TEXT
-                            )";
+                    CREATE TABLE IF NOT EXISTS Statistics (
+                        Id INTEGER PRIMARY KEY,
+                        CurrentStreak INTEGER NOT NULL,
+                        LongestStreak INTEGER NOT NULL,
+                        LastCompletionDate TEXT
+                    )";
                         command.ExecuteNonQuery();
                     }
 
@@ -89,8 +99,8 @@ namespace StudySync.Services
                     using (var command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"
-                            INSERT INTO Statistics (Id, CurrentStreak, LongestStreak, LastCompletionDate)
-                            VALUES (1, 0, 0, NULL)";
+                    INSERT INTO Statistics (Id, CurrentStreak, LongestStreak, LastCompletionDate)
+                    VALUES (1, 0, 0, NULL)";
                         command.ExecuteNonQuery();
                     }
 
@@ -98,12 +108,31 @@ namespace StudySync.Services
                     using (var command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"
-                            INSERT INTO Subjects (Name, Color) VALUES 
-                            ('Math', '#FF5733'),
-                            ('Science', '#33FF57'),
-                            ('English', '#3357FF'),
-                            ('History', '#FF33A8'),
-                            ('Programming', '#33FFF6')";
+                    INSERT INTO Subjects (Name, Color) VALUES 
+                    ('Math', '#FF5733'),
+                    ('Science', '#33FF57'),
+                    ('English', '#3357FF'),
+                    ('History', '#FF33A8'),
+                    ('Programming', '#33FFF6')";
+                        command.ExecuteNonQuery();
+                    }
+
+                    // Add some default tasks for testing
+                    using (var command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText = @"
+                    INSERT INTO Tasks 
+                    (Title, Description, DueDate, IsCompleted, Subject, CompletedDate, EstimatedTime, Priority)
+                    VALUES 
+                    ('Complete Math Homework', 'Chapter 5, exercises 1-10', @DueDate1, 0, 'Math', NULL, 60, 2),
+                    ('Read Science Article', 'Read about quantum computing', @DueDate2, 1, 'Science', @CompletedDate, 30, 1),
+                    ('Write Essay', 'Topic: Climate Change Impact', @DueDate3, 0, 'English', NULL, 120, 3)";
+
+                        command.Parameters.AddWithValue("@DueDate1", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd HH:mm:ss"));
+                        command.Parameters.AddWithValue("@DueDate2", DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd HH:mm:ss"));
+                        command.Parameters.AddWithValue("@DueDate3", DateTime.Now.AddDays(3).ToString("yyyy-MM-dd HH:mm:ss"));
+                        command.Parameters.AddWithValue("@CompletedDate", DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd HH:mm:ss"));
+
                         command.ExecuteNonQuery();
                     }
                 }

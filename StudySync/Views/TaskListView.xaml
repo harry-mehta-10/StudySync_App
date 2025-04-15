@@ -5,15 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudySync.Views"
              xmlns:vm="clr-namespace:StudySync.ViewModels"
-             xmlns:converters="clr-namespace:StudySync.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
-    <UserControl.Resources>
-        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
-        <converters:SubjectToColorConverter x:Key="SubjectToColorConverter"/>
-    </UserControl.Resources>
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -48,33 +41,7 @@
                 Padding="5"
                 VerticalContentAlignment="Center"
                 BorderThickness="1"
-                BorderBrush="#CCCCCC">
-                <TextBox.Style>
-                    <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="TextBox">
-                                    <Border 
-                                        CornerRadius="4"
-                                        Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}">
-                                        <Grid>
-                                            <TextBlock 
-                                                Text="Search tasks..." 
-                                                Foreground="Gray" 
-                                                Padding="5,0,0,0"
-                                                VerticalAlignment="Center"
-                                                Visibility="{Binding Text.IsEmpty, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                                            <ScrollViewer x:Name="PART_ContentHost" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                                        </Grid>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </TextBox.Style>
-            </TextBox>
+                BorderBrush="#CCCCCC"/>
 
             <!-- Subject Filter -->
             <ComboBox 
@@ -170,18 +137,16 @@
                                     FontSize="12"
                                     TextWrapping="Wrap"
                                     Margin="0,5,0,0"
-                                    Opacity="0.7"
-                                    Visibility="{Binding Description, Converter={StaticResource StringToVisibilityConverter}}"/>
+                                    Opacity="0.7"/>
 
                                 <!-- Subject and Due Date -->
                                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                     <!-- Subject Tag -->
                                     <Border 
-                                        Background="{Binding Subject, Converter={StaticResource SubjectToColorConverter}}"
                                         CornerRadius="3"
                                         Padding="5,2"
                                         Margin="0,0,10,0"
-                                        Visibility="{Binding Subject, Converter={StaticResource StringToVisibilityConverter}}">
+                                        Background="{Binding Subject, Converter={StaticResource SubjectToColorConverter}}">
                                         <TextBlock 
                                             Text="{Binding Subject}"
                                             FontSize="11"

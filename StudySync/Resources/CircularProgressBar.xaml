@@ -23,42 +23,6 @@
                 </Path.Data>
             </Path>
         </Grid>
-        <ControlTemplate.Triggers>
-            <EventTrigger RoutedEvent="ProgressBar.Loaded">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <DoubleAnimation Storyboard.TargetName="PART_PathFigure" 
-                                         Storyboard.TargetProperty="StartPoint"
-                                         From="125,8" To="125,8" Duration="0:0:0.001"/>
-                        <PointAnimation Storyboard.TargetName="PART_ArcSegment" 
-                                       Storyboard.TargetProperty="Point"
-                                       From="125,8" 
-                                       To="{Binding RelativeSource={RelativeSource TemplatedParent}, 
-                                                  Path=Value, Converter={StaticResource ProgressToPointConverter}}" 
-                                       Duration="0:0:0.5">
-                            <PointAnimation.EasingFunction>
-                                <CubicEase EasingMode="EaseOut"/>
-                            </PointAnimation.EasingFunction>
-                        </PointAnimation>
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
-            <EventTrigger RoutedEvent="ProgressBar.ValueChanged">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <PointAnimation Storyboard.TargetName="PART_ArcSegment" 
-                                       Storyboard.TargetProperty="Point"
-                                       To="{Binding RelativeSource={RelativeSource TemplatedParent}, 
-                                                  Path=Value, Converter={StaticResource ProgressToPointConverter}}" 
-                                       Duration="0:0:0.5">
-                            <PointAnimation.EasingFunction>
-                                <CubicEase EasingMode="EaseOut"/>
-                            </PointAnimation.EasingFunction>
-                        </PointAnimation>
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
-        </ControlTemplate.Triggers>
     </ControlTemplate>
 
 </ResourceDictionary>

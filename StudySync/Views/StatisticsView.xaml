@@ -4,12 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudySync.Views"
-             xmlns:converters="clr-namespace:StudySync.Helpers"
+             xmlns:viewModels="clr-namespace:StudySync.ViewModels"
+             xmlns:helpers="clr-namespace:StudySync.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <converters:StringToColorConverter x:Key="StringToColorConverter"/>
+        <!-- Style for stat cards -->
+        <Style TargetType="Border" x:Key="StatCardStyle">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
     </UserControl.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -19,15 +27,15 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <!-- Header -->
-            <TextBlock 
-                Grid.Row="0"
-                Text="Statistics" 
-                FontSize="24" 
-                FontWeight="Bold" 
-                Margin="0,0,0,20"/>
+            <TextBlock Grid.Row="0"
+                       Text="Statistics" 
+                       FontSize="24" 
+                       FontWeight="Bold" 
+                       Margin="0,0,0,20"/>
 
             <!-- Overview Stats -->
             <Grid Grid.Row="1" Margin="0,0,0,20">
@@ -38,115 +46,80 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Tasks Completion -->
-                <Border 
-                    Grid.Column="0"
-                    Background="White"
-                    BorderBrush="{StaticResource BorderBrush}"
-                    BorderThickness="1"
-                    CornerRadius="5"
-                    Margin="0,0,10,0"
-                    Padding="15">
-
+                <Border Grid.Column="0"
+                        Style="{StaticResource StatCardStyle}"
+                        Margin="0,0,10,0">
                     <StackPanel>
-                        <TextBlock 
-                            Text="Task Completion"
-                            FontWeight="SemiBold"
-                            Margin="0,0,0,10"/>
-
+                        <TextBlock Text="Task Completion"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,10"/>
                         <TextBlock>
-                            <Run Text="{Binding Statistics.CompletedTasks, StringFormat='{}{0}'}"/>
+                            <Run Text="{Binding Statistics.CompletedTasks}"/>
                             <Run Text=" / "/>
-                            <Run Text="{Binding Statistics.TotalTasks, StringFormat='{}{0}'}"/>
+                            <Run Text="{Binding Statistics.TotalTasks}"/>
                             <Run Text=" tasks completed"/>
                         </TextBlock>
-
-                        <ProgressBar 
-                            Value="{Binding Statistics.CompletionPercentage}"
-                            Maximum="100"
-                            Height="10"
-                            Margin="0,10,0,5"/>
-
-                        <TextBlock 
-                            Text="{Binding Statistics.CompletionPercentage, StringFormat='{0:0.0}%'}"
-                            HorizontalAlignment="Right"
-                            FontWeight="SemiBold"/>
+                        <ProgressBar Value="{Binding Statistics.CompletionPercentage}"
+                                     Maximum="100"
+                                     Height="10"
+                                     Margin="0,10,0,5"/>
+                        <TextBlock Text="{Binding Statistics.CompletionPercentage, StringFormat='{}{0:0.0}%'}"
+                                   HorizontalAlignment="Right"
+                                   FontWeight="SemiBold"/>
                     </StackPanel>
                 </Border>
 
                 <!-- Today's Progress -->
-                <Border 
-                    Grid.Column="1"
-                    Background="White"
-                    BorderBrush="{StaticResource BorderBrush}"
-                    BorderThickness="1"
-                    CornerRadius="5"
-                    Margin="5,0"
-                    Padding="15">
-
+                <Border Grid.Column="1"
+                        Style="{StaticResource StatCardStyle}"
+                        Margin="5,0">
                     <StackPanel>
-                        <TextBlock 
-                            Text="Today's Progress"
-                            FontWeight="SemiBold"
-                            Margin="0,0,0,10"/>
-
+                        <TextBlock Text="Today's Progress"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,10"/>
                         <TextBlock>
-                            <Run Text="{Binding CompletedTasksToday, StringFormat='{}{0}'}"/>
+                            <Run Text="{Binding CompletedTasksToday}"/>
                             <Run Text=" / "/>
-                            <Run Text="{Binding TotalTasksDueToday, StringFormat='{}{0}'}"/>
+                            <Run Text="{Binding TotalTasksDueToday}"/>
                             <Run Text=" tasks completed today"/>
                         </TextBlock>
-
-                        <ProgressBar 
-                            Value="{Binding TodayCompletionPercentage}"
-                            Maximum="100"
-                            Height="10"
-                            Margin="0,10,0,5"/>
-
-                        <TextBlock 
-                            Text="{Binding TodayCompletionPercentage, StringFormat='{0:0.0}%'}"
-                            HorizontalAlignment="Right"
-                            FontWeight="SemiBold"/>
+                        <ProgressBar Value="{Binding TodayCompletionPercentage}"
+                                     Maximum="100"
+                                     Height="10"
+                                     Margin="0,10,0,5"/>
+                        <TextBlock Text="{Binding TodayCompletionPercentage, StringFormat='{}{0:0.0}%'}"
+                                   HorizontalAlignment="Right"
+                                   FontWeight="SemiBold"/>
                     </StackPanel>
                 </Border>
 
                 <!-- Streak -->
-                <Border 
-                    Grid.Column="2"
-                    Background="White"
-                    BorderBrush="{StaticResource BorderBrush}"
-                    BorderThickness="1"
-                    CornerRadius="5"
-                    Margin="10,0,0,0"
-                    Padding="15">
-
+                <Border Grid.Column="2"
+                        Style="{StaticResource StatCardStyle}"
+                        Margin="10,0,0,0">
                     <StackPanel>
-                        <TextBlock 
-                            Text="Streaks"
-                            FontWeight="SemiBold"
-                            Margin="0,0,0,10"/>
-
+                        <TextBlock Text="Streaks"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,10"/>
                         <StackPanel Orientation="Horizontal" Margin="0,5">
                             <TextBlock Text="Current Streak: "/>
                             <TextBlock Text="{Binding Statistics.CurrentStreak}" 
-                                      FontWeight="Bold"
-                                      Foreground="{StaticResource PrimaryBrush}"/>
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource PrimaryBrush}"/>
                             <TextBlock Text=" days"/>
                         </StackPanel>
-
                         <StackPanel Orientation="Horizontal" Margin="0,5">
                             <TextBlock Text="Longest Streak: "/>
                             <TextBlock Text="{Binding Statistics.LongestStreak}" 
-                                      FontWeight="Bold"
-                                      Foreground="{StaticResource AccentBrush}"/>
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource AccentBrush}"/>
                             <TextBlock Text=" days"/>
                         </StackPanel>
-
-                        <TextBlock 
-                            Text="Complete at least one task daily to build your streak!"
-                            TextWrapping="Wrap"
-                            FontStyle="Italic"
-                            Margin="0,10,0,0"
-                            Opacity="0.7"/>
+                        <TextBlock Text="Complete at least one task daily to build your streak!"
+                                   TextWrapping="Wrap"
+                                   FontStyle="Italic"
+                                   Margin="0,10,0,0"
+                                   Opacity="0.7"/>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -158,27 +131,18 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock 
-                    Grid.Row="0"
-                    Text="Subject Performance" 
-                    FontSize="18" 
-                    FontWeight="SemiBold" 
-                    Margin="0,0,0,10"/>
+                <TextBlock Grid.Row="0"
+                           Text="Subject Performance" 
+                           FontSize="18" 
+                           FontWeight="SemiBold" 
+                           Margin="0,0,0,10"/>
 
-                <ItemsControl 
-                    Grid.Row="1"
-                    ItemsSource="{Binding SubjectStats}">
-
+                <ItemsControl Grid.Row="1"
+                              ItemsSource="{Binding SubjectStats}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border 
-                                Background="White"
-                                BorderBrush="{StaticResource BorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="5"
-                                Margin="0,0,0,10"
-                                Padding="15">
-
+                            <Border Style="{StaticResource StatCardStyle}"
+                                    Margin="0,0,0,10">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -186,14 +150,13 @@
                                     </Grid.ColumnDefinitions>
 
                                     <!-- Subject Color Indicator -->
-                                    <Border 
-                                        Grid.Column="0"
-                                        Width="20"
-                                        Height="20"
-                                        CornerRadius="10"
-                                        Background="{Binding Color, Converter={StaticResource StringToColorConverter}}"
-                                        Margin="0,0,15,0"
-                                        VerticalAlignment="Center"/>
+                                    <Border Grid.Column="0"
+                                            Width="20"
+                                            Height="20"
+                                            CornerRadius="10"
+                                            Margin="0,0,15,0"
+                                            VerticalAlignment="Center"
+                                            Background="{Binding Color, Converter={StaticResource StringToColorConverter}}"/>
 
                                     <!-- Subject Stats -->
                                     <Grid Grid.Column="1">
@@ -209,26 +172,21 @@
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock 
-                                                Grid.Column="0"
-                                                Text="{Binding Name}"
-                                                FontWeight="SemiBold"/>
-
-                                            <TextBlock 
-                                                Grid.Column="1"
-                                                Text="{Binding CompletionPercentage, StringFormat='{0:0.0}%'}"
-                                                FontWeight="SemiBold"/>
+                                            <TextBlock Grid.Column="0"
+                                                       Text="{Binding Name}"
+                                                       FontWeight="SemiBold"/>
+                                            <TextBlock Grid.Column="1"
+                                                       Text="{Binding CompletionPercentage, StringFormat='{}{0:0.0}%'}"
+                                                       FontWeight="SemiBold"/>
                                         </Grid>
 
-                                        <ProgressBar 
-                                            Grid.Row="1"
-                                            Value="{Binding CompletionPercentage}"
-                                            Maximum="100"
-                                            Height="8"
-                                            Margin="0,5"/>
+                                        <ProgressBar Grid.Row="1"
+                                                     Value="{Binding CompletionPercentage}"
+                                                     Maximum="100"
+                                                     Height="8"
+                                                     Margin="0,5"/>
 
-                                        <TextBlock 
-                                            Grid.Row="2">
+                                        <TextBlock Grid.Row="2">
                                             <Run Text="{Binding CompletedTasks}"/>
                                             <Run Text=" of "/>
                                             <Run Text="{Binding TotalTasks}"/>
@@ -249,21 +207,14 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock 
-                    Grid.Row="0"
-                    Text="Daily Activity (Last 14 Days)" 
-                    FontSize="18" 
-                    FontWeight="SemiBold" 
-                    Margin="0,0,0,10"/>
+                <TextBlock Grid.Row="0"
+                           Text="Daily Activity (Last 14 Days)" 
+                           FontSize="18" 
+                           FontWeight="SemiBold" 
+                           Margin="0,0,0,10"/>
 
-                <Border
-                    Grid.Row="1"
-                    Background="White"
-                    BorderBrush="{StaticResource BorderBrush}"
-                    BorderThickness="1"
-                    CornerRadius="5"
-                    Padding="15">
-
+                <Border Grid.Row="1"
+                        Style="{StaticResource StatCardStyle}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="150"/>
@@ -271,10 +222,8 @@
                         </Grid.RowDefinitions>
 
                         <!-- Chart Area -->
-                        <ItemsControl 
-                            Grid.Row="0"
-                            ItemsSource="{Binding DailyStats}">
-
+                        <ItemsControl Grid.Row="0"
+                                      ItemsSource="{Binding DailyStats}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <UniformGrid Rows="1"/>
@@ -290,43 +239,75 @@
                                         </Grid.RowDefinitions>
 
                                         <!-- Bar -->
-                                        <Rectangle 
-                                            Grid.Row="0"
-                                            Fill="{StaticResource PrimaryBrush}"
-                                            RadiusX="2"
-                                            RadiusY="2"
-                                            Opacity="0.7"
-                                            VerticalAlignment="Bottom">
-
-                                            <Rectangle.Height>
-                                                <MultiBinding Converter="{StaticResource BarHeightConverter}">
-                                                    <Binding Path="CompletedTasks"/>
-                                                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Grid}}"/>
-                                                </MultiBinding>
-                                            </Rectangle.Height>
-                                        </Rectangle>
+                                        <Rectangle Grid.Row="0"
+                                                   Fill="{StaticResource PrimaryBrush}"
+                                                   RadiusX="2"
+                                                   RadiusY="2"
+                                                   Opacity="0.7"
+                                                   VerticalAlignment="Bottom"
+                                                   Height="{Binding Height}"/>
 
                                         <!-- Date Label -->
-                                        <TextBlock 
-                                            Grid.Row="1"
-                                            Text="{Binding DateDisplay}"
-                                            FontSize="10"
-                                            HorizontalAlignment="Center"
-                                            Margin="0,5,0,0"/>
+                                        <TextBlock Grid.Row="1"
+                                                   Text="{Binding DateDisplay}"
+                                                   FontSize="10"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="0,5,0,0"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
 
                         <!-- Legend -->
-                        <TextBlock 
-                            Grid.Row="1"
-                            Text="Each bar represents the number of tasks completed on that day."
-                            FontStyle="Italic"
-                            Opacity="0.7"
-                            HorizontalAlignment="Center"
-                            Margin="0,10,0,0"/>
+                        <TextBlock Grid.Row="1"
+                                   Text="Each bar represents the number of tasks completed on that day."
+                                   FontStyle="Italic"
+                                   Opacity="0.7"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,10,0,0"/>
                     </Grid>
+                </Border>
+            </Grid>
+
+            <!-- Calendar entries -->
+            <Grid Grid.Row="4" Margin="0,20,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                           Text="Activity Calendar" 
+                           FontSize="18" 
+                           FontWeight="SemiBold" 
+                           Margin="0,0,0,10"/>
+
+                <Border Grid.Row="1"
+                        Style="{StaticResource StatCardStyle}">
+                    <ItemsControl ItemsSource="{Binding CalendarData}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Width="24" Height="24" Margin="2" 
+                                        Background="{Binding Color}">
+                                    <Border.ToolTip>
+                                        <ToolTip>
+                                            <TextBlock>
+                                                <Run Text="{Binding Date, StringFormat='{}{0:MMM dd}'}"/>
+                                                <Run Text=": "/>
+                                                <Run Text="{Binding Count}"/>
+                                                <Run Text=" tasks"/>
+                                            </TextBlock>
+                                        </ToolTip>
+                                    </Border.ToolTip>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </Border>
             </Grid>
         </Grid>

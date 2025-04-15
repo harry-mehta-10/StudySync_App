@@ -9,7 +9,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using StudySync.Helpers;
 using StudySync.ViewModels;
 using StudySync.Views;
 using System;
@@ -55,7 +54,7 @@ namespace StudySync.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/StudySync;V1.0.0.0;component/views/taskeditdialog.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/StudySync;component/views/taskeditdialog.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\TaskEditDialog.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

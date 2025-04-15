@@ -14,7 +14,6 @@ namespace StudySync.ViewModels
         {
             _task = task;
             _databaseService = databaseService;
-
             ToggleCompletionCommand = new RelayCommand(_ => ToggleCompletion());
         }
 
@@ -66,7 +65,6 @@ namespace StudySync.ViewModels
                     return "Tomorrow";
                 if (DueDate.Date == DateTime.Today.AddDays(-1))
                     return "Yesterday";
-
                 return DueDate.ToString("MMM d, yyyy");
             }
         }
@@ -118,13 +116,48 @@ namespace StudySync.ViewModels
 
         private void ToggleCompletion()
         {
-            IsCompleted = !IsCompleted;
-            _databaseService.UpdateTask(_task);
+            try
+            {
+                IsCompleted = !IsCompleted;
+
+                // Set completion date when marking as completed
+                if (IsCompleted && _task.CompletedDate == DateTime.MinValue)
+                {
+                    _task.CompletedDate = DateTime.Now;
+                }
+
+                if (_databaseService != null)
+                {
+                    _databaseService.UpdateTask(_task);
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("ERROR: DatabaseService is null in ToggleCompletion");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in ToggleCompletion: {ex.Message}");
+            }
         }
 
         public void SaveChanges()
         {
-            _databaseService.UpdateTask(_task);
+            try
+            {
+                if (_databaseService != null)
+                {
+                    _databaseService.UpdateTask(_task);
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("ERROR: DatabaseService is null in SaveChanges");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in SaveChanges: {ex.Message}");
+            }
         }
     }
 }

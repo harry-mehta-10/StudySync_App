@@ -9,7 +9,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using StudySync.Helpers;
 using StudySync.ViewModels;
 using StudySync.Views;
 using System;

@@ -1,3 +1,4 @@
+using System;
 using System.Windows.Controls;
 
 namespace StudySync.Views
@@ -9,4 +10,10 @@ namespace StudySync.Views
             InitializeComponent();
         }
     }
+}
+public class CalendarItemViewModel
+{
+    public DateTime Date { get; set; }
+    public int Count { get; set; }
+    public string Color { get; set; }
 }

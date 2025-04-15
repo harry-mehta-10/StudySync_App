@@ -18,7 +18,6 @@ namespace StudySync.ViewModels
         {
             if (Equals(storage, value))
                 return false;
-
             storage = value;
             OnPropertyChanged(propertyName);
             return true;
