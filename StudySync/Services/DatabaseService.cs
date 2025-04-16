@@ -56,17 +56,24 @@ namespace StudySync.Services
                     using (var command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"
-                    CREATE TABLE IF NOT EXISTS Tasks (
-                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        Title TEXT NOT NULL,
-                        Description TEXT,
-                        DueDate TEXT NOT NULL,
-                        IsCompleted INTEGER NOT NULL,
-                        Subject TEXT,
-                        CompletedDate TEXT,
-                        EstimatedTime INTEGER,
-                        Priority INTEGER NOT NULL
-                    )";
+                CREATE TABLE IF NOT EXISTS Tasks (
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Title TEXT NOT NULL,
+                    Description TEXT,
+                    DueDate TEXT NOT NULL,
+                    IsCompleted INTEGER NOT NULL,
+                    Subject TEXT,
+                    CompletedDate TEXT,
+                    EstimatedTime INTEGER,
+                    Priority INTEGER NOT NULL
+                )";
+                        command.ExecuteNonQuery();
+                    }
+
+                    // Create index on Subject column in Tasks table
+                    using (var command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText = "CREATE INDEX idx_tasks_subject ON Tasks(Subject)";
                         command.ExecuteNonQuery();
                     }
 
@@ -74,11 +81,11 @@ namespace StudySync.Services
                     using (var command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"
-                    CREATE TABLE IF NOT EXISTS Subjects (
-                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        Name TEXT NOT NULL UNIQUE,
-                        Color TEXT NOT NULL
-                    )";
+                CREATE TABLE IF NOT EXISTS Subjects (
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Name TEXT NOT NULL UNIQUE,
+                    Color TEXT NOT NULL
+                )";
                         command.ExecuteNonQuery();
                     }
 
@@ -86,12 +93,12 @@ namespace StudySync.Services
                     using (var command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"
-                    CREATE TABLE IF NOT EXISTS Statistics (
-                        Id INTEGER PRIMARY KEY,
-                        CurrentStreak INTEGER NOT NULL,
-                        LongestStreak INTEGER NOT NULL,
-                        LastCompletionDate TEXT
-                    )";
+                CREATE TABLE IF NOT EXISTS Statistics (
+                    Id INTEGER PRIMARY KEY,
+                    CurrentStreak INTEGER NOT NULL,
+                    LongestStreak INTEGER NOT NULL,
+                    LastCompletionDate TEXT
+                )";
                         command.ExecuteNonQuery();
                     }
 
@@ -99,8 +106,8 @@ namespace StudySync.Services
                     using (var command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"
-                    INSERT INTO Statistics (Id, CurrentStreak, LongestStreak, LastCompletionDate)
-                    VALUES (1, 0, 0, NULL)";
+                INSERT INTO Statistics (Id, CurrentStreak, LongestStreak, LastCompletionDate)
+                VALUES (1, 0, 0, NULL)";
                         command.ExecuteNonQuery();
                     }
 
@@ -108,12 +115,12 @@ namespace StudySync.Services
                     using (var command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"
-                    INSERT INTO Subjects (Name, Color) VALUES 
-                    ('Math', '#FF5733'),
-                    ('Science', '#33FF57'),
-                    ('English', '#3357FF'),
-                    ('History', '#FF33A8'),
-                    ('Programming', '#33FFF6')";
+                INSERT INTO Subjects (Name, Color) VALUES 
+                ('Math', '#FF5733'),
+                ('Science', '#33FF57'),
+                ('English', '#3357FF'),
+                ('History', '#FF33A8'),
+                ('Programming', '#33FFF6')";
                         command.ExecuteNonQuery();
                     }
 
@@ -121,12 +128,12 @@ namespace StudySync.Services
                     using (var command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"
-                    INSERT INTO Tasks 
-                    (Title, Description, DueDate, IsCompleted, Subject, CompletedDate, EstimatedTime, Priority)
-                    VALUES 
-                    ('Complete Math Homework', 'Chapter 5, exercises 1-10', @DueDate1, 0, 'Math', NULL, 60, 2),
-                    ('Read Science Article', 'Read about quantum computing', @DueDate2, 1, 'Science', @CompletedDate, 30, 1),
-                    ('Write Essay', 'Topic: Climate Change Impact', @DueDate3, 0, 'English', NULL, 120, 3)";
+                INSERT INTO Tasks 
+                (Title, Description, DueDate, IsCompleted, Subject, CompletedDate, EstimatedTime, Priority)
+                VALUES 
+                ('Complete Math Homework', 'Chapter 5, exercises 1-10', @DueDate1, 0, 'Math', NULL, 60, 2),
+                ('Read Science Article', 'Read about quantum computing', @DueDate2, 1, 'Science', @CompletedDate, 30, 1),
+                ('Write Essay', 'Topic: Climate Change Impact', @DueDate3, 0, 'English', NULL, 120, 3)";
 
                         command.Parameters.AddWithValue("@DueDate1", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd HH:mm:ss"));
                         command.Parameters.AddWithValue("@DueDate2", DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd HH:mm:ss"));
@@ -139,10 +146,13 @@ namespace StudySync.Services
             }
         }
 
+
         #region Task Operations
 
         public List<Models.Task> GetAllTasks()
         {
+            System.Diagnostics.Debug.WriteLine("Entering GetAllTasks");
+
             var tasks = new List<Models.Task>();
 
             using (var connection = new SQLiteConnection(_connectionString))
@@ -174,6 +184,7 @@ namespace StudySync.Services
                 }
             }
 
+            System.Diagnostics.Debug.WriteLine("Exiting GetAllTasks");
             return tasks;
         }
 

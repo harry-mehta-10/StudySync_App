@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
+using System.Windows.Threading;
 using StudySync.Models;
 using StudySync.Services;
 
@@ -11,12 +13,15 @@ namespace StudySync.ViewModels
     public class TaskListViewModel : ViewModelBase
     {
         private readonly DatabaseService _databaseService;
+        private readonly DispatcherTimer _debounceTimer;
         private ObservableCollection<TaskViewModel> _tasks;
         private ObservableCollection<Subject> _subjects;
         private TaskViewModel _selectedTask;
         private string _selectedSubjectFilter;
         private string _searchText;
         private bool _showCompletedTasks;
+        private int _refreshTasksCallCount = 0; // Counter to track calls
+        private bool _isRefreshingTasks = false;
 
         public TaskListViewModel(DatabaseService databaseService)
         {
@@ -24,12 +29,19 @@ namespace StudySync.ViewModels
                 throw new ArgumentNullException(nameof(databaseService), "Database service cannot be null");
 
             _databaseService = databaseService;
-            System.Diagnostics.Debug.WriteLine("TaskListViewModel constructor: DatabaseService initialized");
+            Debug.WriteLine("TaskListViewModel constructor: DatabaseService initialized");
 
             Tasks = new ObservableCollection<TaskViewModel>();
             Subjects = new ObservableCollection<Subject>();
             _selectedSubjectFilter = "All";
             _showCompletedTasks = true;
+
+            // Initialize debounce timer
+            _debounceTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(500) // Adjust the interval as needed
+            };
+            _debounceTimer.Tick += DebounceTimer_Tick;
 
             // Commands
             AddTaskCommand = new RelayCommand(_ => AddTask());
@@ -40,12 +52,12 @@ namespace StudySync.ViewModels
             // Load data after initialization
             try
             {
-                RefreshTasks();
+                //RefreshTasks();
                 RefreshSubjects();
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error during TaskListViewModel initialization: {ex.Message}");
+                Debug.WriteLine($"Error during TaskListViewModel initialization: {ex.Message}");
             }
         }
 
@@ -116,24 +128,54 @@ namespace StudySync.ViewModels
         public ICommand DeleteTaskCommand { get; }
         public ICommand CompleteTaskCommand { get; }
 
+        private void DebounceTimer_Tick(object sender, EventArgs e)
+        {
+            _debounceTimer.Stop();
+            //RefreshTasksInternal();
+        }
+
         public void RefreshTasks()
         {
+            _refreshTasksCallCount++;
+            Debug.WriteLine($"RefreshTasks called {_refreshTasksCallCount} times. _isRefreshingTasks: {_isRefreshingTasks}");
+
+            if (_isRefreshingTasks)
+            {
+                Debug.WriteLine("RefreshTasks is already running, skipping this call.");
+                return;
+            }
+
+            _debounceTimer.Stop();
+            _debounceTimer.Start();
+        }
+
+        private void RefreshTasksInternal()
+        {
+            _isRefreshingTasks = true;
+
             if (_databaseService == null)
             {
-                System.Diagnostics.Debug.WriteLine("ERROR: DatabaseService is null in RefreshTasks");
+                Debug.WriteLine("ERROR: DatabaseService is null in RefreshTasks");
+                _isRefreshingTasks = false;
                 return;
             }
 
             try
             {
+                Debug.WriteLine("Calling GetAllTasks");
                 var allTasks = _databaseService.GetAllTasks();
+                Debug.WriteLine("GetAllTasks returned");
+
                 if (allTasks == null)
                 {
                     Tasks.Clear();
+                    _isRefreshingTasks = false;
                     return;
                 }
 
+                Debug.WriteLine("Creating TaskViewModels");
                 var taskViewModels = allTasks.Select(t => new TaskViewModel(t, _databaseService)).ToList();
+                Debug.WriteLine("TaskViewModels created");
 
                 int? selectedTaskId = SelectedTask?.Task?.Id;
 
@@ -148,11 +190,18 @@ namespace StudySync.ViewModels
                     SelectedTask = Tasks.FirstOrDefault(t => t.Task.Id == selectedTaskId.Value);
                 }
 
+                Debug.WriteLine("Calling FilterTasks");
                 FilterTasks();
+                Debug.WriteLine("FilterTasks returned");
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error in RefreshTasks: {ex.Message}");
+                Debug.WriteLine($"Error in RefreshTasks: {ex.Message}");
+            }
+            finally
+            {
+                _isRefreshingTasks = false;
+                Debug.WriteLine($"Exiting RefreshTasks. _isRefreshingTasks testsetste: {_isRefreshingTasks}");
             }
         }
 
@@ -174,7 +223,7 @@ namespace StudySync.ViewModels
                 }
 
                 Subjects.Clear();
-                foreach (var subject in allSubjects)
+                foreach (var subject in _databaseService.GetAllSubjects())
                 {
                     Subjects.Add(subject);
                 }
@@ -187,6 +236,7 @@ namespace StudySync.ViewModels
 
         private void FilterTasks()
         {
+            Debug.WriteLine("Entering FilterTasks");
             var filteredTasks = Tasks.ToList();
 
             if (!ShowCompletedTasks)
@@ -212,6 +262,7 @@ namespace StudySync.ViewModels
                                          .ToList();
 
             Tasks = new ObservableCollection<TaskViewModel>(filteredTasks);
+            Debug.WriteLine("Exiting FilterTasks");
         }
 
         private void AddTask()
@@ -226,7 +277,7 @@ namespace StudySync.ViewModels
 
             int id = _databaseService.AddTask(newTask);
 
-            RefreshTasks();
+            //RefreshTasks();
 
             var newTaskVm = Tasks.FirstOrDefault(t => t.Task.Id == id);
             if (newTaskVm != null)
@@ -247,7 +298,7 @@ namespace StudySync.ViewModels
             if (result == true)
             {
                 _databaseService.UpdateTask(taskDialog.EditedTask);
-                RefreshTasks();
+                //RefreshTasks();
             }
         }
 
@@ -261,7 +312,7 @@ namespace StudySync.ViewModels
             if (result == true)
             {
                 _databaseService.DeleteTask(SelectedTask.Task.Id);
-                RefreshTasks();
+                //RefreshTasks();
             }
         }
 
@@ -273,7 +324,7 @@ namespace StudySync.ViewModels
             SelectedTask.Task.IsCompleted = !SelectedTask.Task.IsCompleted;
             _databaseService.UpdateTask(SelectedTask.Task);
 
-            RefreshTasks();
+            //RefreshTasks();
         }
 
         // These methods would connect to UI dialogs - implemented in the View

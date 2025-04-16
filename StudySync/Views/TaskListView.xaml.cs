@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using StudySync.Services;
 using StudySync.ViewModels;
 
 namespace StudySync.Views
@@ -10,27 +11,20 @@ namespace StudySync.Views
         {
             InitializeComponent();
 
-            // If DataContext is a TaskListViewModel, attach dialog services
-            if (DataContext is TaskListViewModel vm)
+            DataContextChanged += (s, e) =>
             {
-                AttachDialogServices(vm);
-            }
-            else
-            {
-                DataContextChanged += (s, e) =>
+                if (e.NewValue is TaskListViewModel viewModel)
                 {
-                    if (e.NewValue is TaskListViewModel viewModel)
-                    {
-                        AttachDialogServices(viewModel);
-                    }
-                };
-            }
+                    AttachDialogServices(viewModel);
+                }
+            };
         }
 
         private void AttachDialogServices(TaskListViewModel viewModel)
         {
-            // Create a derived class that handles dialogs
-            var vmWithDialogs = new TaskListViewModelWithDialogs(viewModel);
+            // Ensure that DatabaseService is passed to the ViewModelWithDialogs constructor
+            var databaseService = new DatabaseService(); // You might want to retrieve this from DI or another source
+            var vmWithDialogs = new TaskListViewModelWithDialogs(viewModel, databaseService);
             DataContext = vmWithDialogs;
         }
 
@@ -38,8 +32,9 @@ namespace StudySync.Views
         {
             private readonly TaskListViewModel _originalViewModel;
 
-            public TaskListViewModelWithDialogs(TaskListViewModel viewModel)
-                : base(null) // Not used, we're delegating
+            // Pass the DatabaseService to the base constructor
+            public TaskListViewModelWithDialogs(TaskListViewModel viewModel, DatabaseService databaseService)
+                : base(databaseService)  // Pass the databaseService to the base constructor
             {
                 _originalViewModel = viewModel;
 
@@ -62,6 +57,7 @@ namespace StudySync.Views
                         Subjects = _originalViewModel.Subjects;
                 };
             }
+
             protected override bool? ShowTaskEditDialog(TaskEditViewModel viewModel)
             {
                 var dialog = new TaskEditDialog(viewModel);

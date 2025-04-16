@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Windows.Input;
 using StudySync.Models;
 using StudySync.Services;
@@ -12,9 +13,10 @@ namespace StudySync.ViewModels
 
         public TaskViewModel(Models.Task task, DatabaseService databaseService)
         {
+            Debug.WriteLine("Entering TaskViewModel constructor");
             _task = task;
             _databaseService = databaseService;
-            ToggleCompletionCommand = new RelayCommand(_ => ToggleCompletion());
+            Debug.WriteLine("Exiting TaskViewModel constructor");
         }
 
         public Models.Task Task
